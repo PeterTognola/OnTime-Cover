@@ -1,0 +1,19 @@
+﻿<Window x:Class="OnTime_Cover.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="450" Width="450" ResizeMode="NoResize" Icon="dep/FavIcon.png" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <ComboBox Margin="10,10" VerticalAlignment="Top" Height="30"
+                  Name="ReleaseComboBox"
+                  VerticalContentAlignment="Center"
+                  DisplayMemberPath="Name"
+                  ItemsSource="{Binding ReleasesList}"
+                  SelectedItem="{Binding SelectedRelease, Mode=TwoWay}"/>
+        <TextBox Text="{Binding DefectGeneratedInput}" IsReadOnly="True" VerticalScrollBarVisibility="Visible" Margin="10,50" VerticalAlignment="Bottom" Height="100" />
+        <TextBox Text="{Binding FeatureGeneratedInput}" IsReadOnly="True" VerticalScrollBarVisibility="Visible" Margin="10,0,10,165" VerticalAlignment="Bottom" Height="100" />
+        <TextBox AcceptsReturn="True" Text="{Binding UserMessageInput}" VerticalScrollBarVisibility="Visible" Margin="10,0,10,280" VerticalAlignment="Bottom" Height="75" SpellCheck.IsEnabled="True" ToolTip="Enter your message..." IsManipulationEnabled="True" />
+
+        <Button Command="{Binding SendDefectList}" Content="Send" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="10,10" Width="106" Height="30"/>
+        <TextBox VerticalContentAlignment="Center" HorizontalAlignment="Left" Height="30" Margin="10, 10" Text="{Binding UserAddressInput}" VerticalAlignment="Bottom" Width="300"/>
+    </Grid>
+</Window>

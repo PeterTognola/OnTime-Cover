@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="OnTime_Cover_Installer" Language="1033" Version="1.0.0.0" Manufacturer="Phoenix Software - James Tognola" UpgradeCode="a0c4566c-2609-4738-884a-fd986cce887e">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+
+		<Feature Id="ProductFeature" Title="OnTime_Cover_Installer" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="OnTime_Cover_Installer" />
+			</Directory>
+
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ProgramMenuSubfolder" Name="Example">
+          <Component Id="OnTimeCoverShortcuts" Guid="12345678-1234-1234-1234-333333333333">
+            <Shortcut Id="OnTimeCoverShortcut1" Name="OnTime Cover" Description="OnTime Cover"
+                      Target="[INSTALLFOLDER]OnTime Cover.exe" WorkingDirectory="INSTALLFOLDER"/>
+            <RegistryValue Root="HKCU" Key="Software\Phoenix Software - James Tognola\OnTime Cover"
+                      Name="installed" Type="integer" Value="1" KeyPath="yes"/>
+            <RemoveFolder Id="ProgramMenuSubfolder" On="uninstall"/>
+          </Component>
+        </Directory>
+      </Directory>
+    </Directory>
+	</Fragment>
+
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+			<Component Id="OnTimeCoverComponent">
+        <File Source="$(var.OnTime Cover.TargetPath)" />
+        <File Source="$(var.OnTime Cover.TargetPath).config"/>
+			</Component>
+      
+      <Component Id="OnTimeCoverAxosoftDll">
+        <File Source="$(var.OnTime Cover.TargetDir)\AxosoftAPI.NET.dll"/>
+      </Component>
+      
+      <Component Id="OnTimeCoverNewtonsoftDll">
+        <File Source="$(var.OnTime Cover.TargetDir)\Newtonsoft.Json.dll"/>
+      </Component>
+      
+      <Component Id="OnTimeCoverHTML">
+        <File Source="$(var.OnTime Cover.TargetDir)..\..\dep\email\email_template.min.html"/>
+      </Component>
+      
+      <ComponentRef Id="OnTimeCoverShortcuts"/>
+		</ComponentGroup>
+	</Fragment>
+</Wix>
